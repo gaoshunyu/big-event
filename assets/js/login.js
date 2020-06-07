@@ -26,16 +26,15 @@ $(function() {
             success: function(res) {
                 // 5. 根据接口返回的结果,无论成功还是失败,都要给出一个提示
                 // 5.1 如果失败了, 给出一个提示
-                console.log(res);
+                // console.log(res);
 
-                // alert(res.message)
-                // 5.2 如果成功了,显示登陆的盒子,隐藏注册盒子
-                // if()
+                alert(res.message)
+                    // 5.2 如果成功了,显示登陆的盒子,隐藏注册盒子
+                if (res.status === 0) {
+                    $('#login').show().next().hide()
+                }
             }
         })
-
-
     })
-
 
 });
