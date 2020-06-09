@@ -1,11 +1,25 @@
-// $(function() {
+$(function() {
+        // 进入index.html页面后,马上发ajax请求,获取用户信息,并渲染到页面中
+        getUserInfo();
 
+        // -------------------退出功能--------------------
+        $('#logout').click(function() {
+            // 询问是否要退出
+            layer.confirm('确定要退出吗？', { icon: 3, title: '提示' }, function(index) {
+                //do something
+                //1.删除token
+                localStorage.removeItem('token')
+                    // 2.跳转到/login.html
+                location.href = '/login.html';
+                layer.close(index);
+            });
+        })
 
-//         // -------------------退出功能--------------------
-
-//     })
-// 入口函数外面封装,全局函数, 方便在其他位置调用
+    })
+    // 入口函数外面封装,全局函数, 方便在其他位置调用
 function getUserInfo() {
+
+
     $.ajax({
         url: 'http://www.liulongbin.top:3007/my/userinfo',
         // success函数, 在ajax请求成功之后触发
@@ -21,17 +35,24 @@ function getUserInfo() {
                 } else {
                     var t = myname.substr(0, 1).toUpperCase();
                     $('.text-avatar').text(t).css('display', 'inline-block');
+                    $('.layui-nav-img').hide();
                 }
             }
         },
         // complete函数, 在ajax请求完成(无论成败)之后触发
         complete: function(xhr) {
             // 在这里判断验证是否成功
-            // console.log(xhr);
+            console.log(xhr);
             if (xhr.responseJSON.status === 1 && xhr.responseJSON.message === '身份认证失败！') {
                 // 删除假token
+                localStorage.removeItem('token');
+                location.href = '/login.html';
             }
 
+        },
+        // jQuery中ajax选项，有一个headers，通过他，可以设置请求头
+        headers: {
+            'Authorization': localStorage.getItem('token')
         }
-    })
+    });
 }

@@ -1,3 +1,11 @@
+<script>
+    // 判断，本地存储中是否有token，如果没有，说明没有登录，则跳转到登录页面
+    // 现在只是判断了token是否存在，并没有判断token正确与否
+    if (localStorage.getItem('token') === null) {
+        location.href = '/login.html';
+    }
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +18,9 @@
     <!-- 加载自己的 css -->
     <link rel="stylesheet" href="/assets/css/index.css">
     <!-- 加载jQuery -->
-    <link rel="stylesheet" href="/assets/lib/jquery.js">
+    <script src="/assets/lib/jquery.js"></script>
     <!-- 加载自己的js -->
-    <link rel="stylesheet" href="/assets/js/index.js">
+    <script src="/assets/js/index.js"></script>
 </head>
 
 <body class="layui-layout-body">
@@ -26,6 +34,8 @@
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
+                        <!-- 这里加了文字类型头像 -->
+                        <span class="text-avatar">J</span>
                         <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> 个人中心
                     </a>
                     <dl class="layui-nav-child">
@@ -41,7 +51,7 @@
         <div class="layui-side layui-bg-black">
             <div class="layui-side-scroll">
                 <div class="userinfo" href="javascript:;">
-                    <span class="text-avatar">L</span>
+                    <span class="text-avatar">J</span>
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> 欢迎&nbsp;&nbsp;
                     <span class="myname">高先生</span>
                 </div>
